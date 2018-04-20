@@ -87,7 +87,7 @@ a:active, a:active code {
     position:absolute;	
 }
 .element {
-    background: none repeat scroll 0 0 #888888;
+    background: none repeat scroll 0 0 #000000;
     border-top-right-radius: 1.2em;
     color: #222222;
     float: left;
@@ -105,9 +105,9 @@ a:active, a:active code {
     right: 0.5em;
     top: 0.5em;
 }	
-.element .symbol {
+.element .room_name {
     color: #FFFFFF;
-    font-size: 7.8em;
+    font-size: 2vw;
     left: 0.2em;
     line-height: 1em;
     top: 0.4em;
@@ -116,6 +116,16 @@ a:active, a:active code {
     bottom: 1.7em;
     font-size: 1.1em;
     left: 0.5em;
+}
+.element .room_good {
+    bottom: 0;
+    font-size: 1.3em;
+    left: 0;
+}
+.element .room_bad {
+    bottom: 0;
+    font-size: 1.3em;
+    right: 0;
 }
 .element .weight {
     bottom: 0.5em;
@@ -131,8 +141,14 @@ a:active, a:active code {
 .element:hover h2 {
     color: white;
 }
-.element.nonmetal {
-    background: none repeat scroll 0 0 #62C2CC;
+.element.room {
+    background: none repeat scroll 0 0 seagreen;
+    width: 100%;
+    height: 100%;
+}
+#good_button{
+   
+    right: 50px;
 }
 #chitikaAdBlock-0, #chitikaAdBlock-1, #chitikaAdBlock-2, #chitikaAdBlock-3 {
     margin-left: 23%;
