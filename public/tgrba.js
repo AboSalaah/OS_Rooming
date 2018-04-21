@@ -1,19 +1,25 @@
-var content = [];
+// types 0--> good 1-->bad
 
-$( "#guest").click(function() {
+var socket;
+var room_name;
+function setup() {
+
+    var content = [];
+
+ $( "#guest").click(function() {
     $(".container").remove();
     // request to get the rooms
     $.getJSON('/rooms', function(data){ 
      alert("success");
-     console.log(data);
+    
      $('body').append('<div id="grid"></div>');
       for (var i = 0; i < data['rooms'].length; i++) {
         var room = data['rooms'][i];
-        console.log(room.name);
+       
         content.push('<div class="element room"><h3 class="room_name">'+room.name+'</h3> <h6 class="room_good">'+room.good+'</h6><h6 class="room_bad">'+room.bad+'</h6><button type="button" id="good_button">Good</button><button type="button" id="bad_button">Bad</button></div>');
    }
    
-    console.log(content);
+  
     $(function(){
         $('#grid').jresponsive({
             min_size: 50,
@@ -25,7 +31,7 @@ $( "#guest").click(function() {
             content_array: content,
             transfromation: 'animate'
         });
-        console.log($('#grid').width());
+       
     });
 
 
@@ -36,34 +42,39 @@ $( "#guest").click(function() {
          var good_num = parseInt(good_button.siblings('.room_good').text());
 
          var bad_num = parseInt(good_button.siblings('.room_bad').text());
-         var room_name = good_button.siblings('.room_name').text();
+          room_name = good_button.siblings('.room_name').text();
          var data={
             room : room_name,
             good : good_num+1,
-            bad : bad_num
+            bad : bad_num,
+            type : 0
          };
           User_Connection(data);
     });
     bad_button.on("click",function(){
          var good_num =  parseInt(bad_button.siblings('.room_good').text());
          var bad_num =   parseInt(bad_button.siblings('.room_bad').text());
-         var room_name = bad_button.siblings('.room_name').text();
+          room_name = bad_button.siblings('.room_name').text();
          var data={
             room : room_name,
             good : good_num,
-            bad : bad_num+1
+            bad : bad_num+1,
+            type : 1
+            
          };
          User_Connection(data);
     });
     function User_Connection(data){
+        console.log("i'm on user connection");
         var name = data.room;
-        console.log("name :"+name);
-        var socket=io.connect('http://localhost:3000');
-        console.log("data mn el client "+data);
+       
+         socket=io.connect('http://localhost:3000');
+      
         socket.emit('room', data);
          $("#grid").remove();
-         gameloop();
-
+        createCanvas(800, 200);
+        background(0);
+        socket.on('mouse',newDrawing);
     }
     
     /*myrooms.on("click",function(){
@@ -82,10 +93,28 @@ $( "#guest").click(function() {
   });
 
   });
-  function gameloop() {
-    createCanvas(800, 200);
-    background(0);
-    textSize(32);
-    fill(0, 102, 153);
-    requestAnimationFrame(gameloop);
-  }
+
+}
+function newDrawing(data){
+    console.log("data at newDrawing: "+data);
+    noStroke();
+    fill(255,0,100);
+    ellipse(data.x,data.y,40,40);
+}
+function mousePressed(){
+    if(socket != null){
+    var data={
+        x: mouseX,
+        y: mouseY,
+        room : room_name
+    }
+    console.log("data at mousePresseed: "+data);
+    socket.emit('mouse',data);
+    noStroke();
+    fill(255);
+    ellipse(mouseX,mouseY,40,40);
+    }
+}
+function draw() {
+
+}
