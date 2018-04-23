@@ -37,7 +37,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     display: block;
 }
 body {
-    background: none repeat scroll 0 0 #C1DAD6;
+    background: none repeat scroll 0 0 black;
     color: #FFFFFF;
     font-family: 'Lucida Sans','Lucida Sans Regular','Lucida Grande','Lucida Sans Unicode',Arial,sans-serif;
     font-size: 13px;
@@ -77,7 +77,8 @@ a:active, a:active code {
     bottom: 0;
     height: 100%;
     overflow-x: hidden;
-    overflow-y: hidden;		
+    overflow-y: hidden;	
+    overflow: auto;
     top: 5px;
     position:relative;
     margin:0 auto;
@@ -93,6 +94,7 @@ a:active, a:active code {
     float: left;
     height: 98%;	
     width: 98%;
+    margin-top: 5%;
 }	
 .element * {
     margin: 0;
@@ -107,7 +109,7 @@ a:active, a:active code {
 }	
 .element .room_name {
     color: #FFFFFF;
-    font-size: 2vw;
+    font-size: 4vw;
     left: 0.2em;
     line-height: 1em;
     top: 0.4em;
@@ -142,7 +144,7 @@ a:active, a:active code {
     color: white;
 }
 .element.room {
-    background: none repeat scroll 0 0 seagreen;
+    background: none repeat scroll 0 0 rgb(255, 81, 0);
     width: 100%;
     height: 100%;
 }
@@ -153,4 +155,34 @@ a:active, a:active code {
 #chitikaAdBlock-0, #chitikaAdBlock-1, #chitikaAdBlock-2, #chitikaAdBlock-3 {
     margin-left: 23%;
     margin-right: 23%;
+}
+
+.container{
+    background-color:black;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    
+}
+#login{
+    height: 100px;
+    width: 300px;
+   margin-bottom: 50%;
+   background-color: rgb(255, 81, 0);
+   border-radius: 12px;
+   font-size: 30px;
+   color: white;
+}
+#guest{
+    height: 100px;
+    width: 300px;
+    margin-bottom: 50%;
+    background-color:  rgb(255, 81, 0);
+    border-radius: 12px;
+    font-size: 30px;
+    color: white;
+}
+#bodername{
+    font-size: 30px;
+    color: #11FFBB;
 }

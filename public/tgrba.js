@@ -2,6 +2,7 @@
 
 var socket;
 var room_name;
+const system_room_number=5;
 function setup() {
 
     var content = [];
@@ -13,6 +14,7 @@ function setup() {
      alert("success");
     
      $('body').append('<div id="grid"></div>');
+    
       for (var i = 0; i < data['rooms'].length; i++) {
         var room = data['rooms'][i];
        
@@ -40,7 +42,7 @@ function setup() {
     var bad_button=$("#bad_button");
     good_button.on("click",function(){
          var good_num = parseInt(good_button.siblings('.room_good').text());
-
+        if(good_num<system_room_number){
          var bad_num = parseInt(good_button.siblings('.room_bad').text());
           room_name = good_button.siblings('.room_name').text();
          var data={
@@ -50,10 +52,12 @@ function setup() {
             type : 0
          };
           User_Connection(data);
+        }
     });
     bad_button.on("click",function(){
          var good_num =  parseInt(bad_button.siblings('.room_good').text());
          var bad_num =   parseInt(bad_button.siblings('.room_bad').text());
+         if(bad_num<system_room_number){
           room_name = bad_button.siblings('.room_name').text();
          var data={
             room : room_name,
@@ -63,6 +67,7 @@ function setup() {
             
          };
          User_Connection(data);
+        }
     });
     function User_Connection(data){
         console.log("i'm on user connection");
@@ -73,7 +78,8 @@ function setup() {
         socket.emit('room', data);
          $("#grid").remove();
         createCanvas(800, 200);
-        background(0);
+        background(255);
+        fill(255, 81, 0);
         socket.on('mouse',newDrawing);
     }
     
